@@ -1,5 +1,5 @@
 (ns com.firstlinq.ssr.view.reagent
-  (:require [reagent.core :as reagent]
+  (:require [reagent.core :as reagent :refer [atom]]
             [com.firstlinq.ssr.router :refer [path-for handle-navigate]]))
 
 (defn link

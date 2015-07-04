@@ -25,7 +25,7 @@
      (r-fn# ~state-sym)))
 
 
-(defmacro defroute
+(defmacro defhandler
   ""
   [route-id title args & service-calls]
   (let [[opts service-calls] (if (map? (first service-calls))
