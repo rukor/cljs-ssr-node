@@ -1,3 +1,3 @@
-# Introduction to cljs-ssr-node
+# Brain Dump
 
-TODO: write [great documentation](http://jacobian.org/writing/what-to-write/)
+
