@@ -4,10 +4,14 @@
   (let [prefix `(str (js/Date.) " " ~level)
         msg    (map (fn [x] `(com.firstlinq.ssr.log/->log-output ~x)) msg)]
     (condp = level
-      :info `(when js/console (.log js/console ~prefix ~@msg))
-      :debug `(when js/console (.debug js/console ~prefix ~@msg))
-      :warn `(when js/console (.warn js/console ~prefix ~@msg))
-      :error `(when js/console (.error js/console ~prefix ~@msg))
+      :info `(when (and com.firstlinq.ssr.log/*logging-enabled* js/console)
+               (.log js/console ~prefix ~@msg))
+      :debug `(when (and com.firstlinq.ssr.log/*logging-enabled* js/console)
+                (.debug js/console ~prefix ~@msg))
+      :warn `(when (and com.firstlinq.ssr.log/*logging-enabled* js/console)
+               (.warn js/console ~prefix ~@msg))
+      :error `(when (and com.firstlinq.ssr.log/*logging-enabled* js/console)
+                (.error js/console ~prefix ~@msg))
       )))
 
 (defmacro info [& msg] `(do-log :info ~@msg))
