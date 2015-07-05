@@ -26,7 +26,38 @@
 
 
 (defmacro defhandler
-  ""
+  "Defines a handler to be invoked when a route is matched by the router.
+
+  Usage:
+
+  (defhandler route-id title args & service-calls)
+
+  Where:
+
+    route-id      - the id of the matched route
+    title         - a string or function that is used to generate the page title for that route
+    args          - vector of parameters (query/path) that should be extracted from the route matcher
+    service-calls - a list of pairs of data-key and service calls [data-key service-call]
+
+  A data key may be a keyword, string or vector while a service call may either be a service id (for which
+  a com.firstlinq.ssr.api/handle-request multi-method entry has been defined), or a service id and parameters.
+  Note that the parameters may use any of the bound items in args.
+
+  For example
+
+  (defhandler :hello \"Greeting\" [name]
+    :greeting [:say-hello name])
+
+  defines a handler for route-id :hello, with a page title of \"Greeting\". A single parameter `name` is extracted
+  from the route matcher and bound to the symbol `name`, which is then passed as a parameter to the :say-hello service
+  call. The result of the [:say-hello name] call is stored in the state map with key :greeting. This is then accessible
+  by the views that get rendered throughout the component tree.
+
+  If a service call takes no parameters, then it can simply be represented as a keyword, e.g.
+
+  :greeting :say-hello-world."
+
+
   [route-id title args & service-calls]
   (let [[opts service-calls] (if (map? (first service-calls))
                                [(first service-calls) (rest service-calls)]
