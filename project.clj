@@ -1,4 +1,4 @@
-(defproject com.firstlinq/cljs-ssr-node "0.1.0"
+(defproject com.firstlinq/cljs-ssr-node "0.1.1-SNAPSHOT"
   :description "CLJS Server Side Rendering for NodeJS"
   :url "http://github.com/rukor/cljs-ssr-node"
   :license {:name "Eclipse Public License"

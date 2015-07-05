@@ -42,7 +42,7 @@
           (let [[k [v txform]] item
                 res (<! v)
                 res (if txform (txform (:body res)) (:body res))
-                res (assoc accum k res)]
+                res (if (vector? k) (assoc-in accum k res) (assoc accum k res))]
             (recur res (rest items)))
           (put! ch (add-title-to-state title accum)))))
     ch))
