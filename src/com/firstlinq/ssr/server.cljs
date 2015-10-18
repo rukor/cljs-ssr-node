@@ -32,7 +32,7 @@
                    (template state)
                    (.send res)))
             (do (print "No state returned for " (:uri req))
-                (.send res "Not found"))))))))
+                (.send res "Not found" 404))))))))
 
 
 (defn start [& {:keys [renderer template-file request->state serialiser
